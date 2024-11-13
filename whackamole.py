@@ -1,5 +1,5 @@
 import pygame
-from constants import *
+
 """
 The mole image should be drawn in the top left square.
 When the user clicks on the mole's square, it should move to a different random square.
