@@ -1,4 +1,5 @@
 import pygame
+import random
 
 """
 The mole image should be drawn in the top left square.
@@ -35,14 +36,24 @@ def draw_grid():
 def main():
     try:
         # You can draw the mole with this snippet:
+        row, col = (0,0)
         running = True
         while running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    x, y = event.pos  # tuple of coordinates
+                    print("x and y",x, y)
+                    a, b = (x // 32, y // 32)
+                    print("a and b", a, b)
+                    print("row and column",row,col)
+                    if a == row and b == col:
+                        row, col = (random.randint(0,19), random.randint(0,15))
+
             screen.fill("light green")
             draw_grid()  # call function to draw the grid while running
-            screen.blit(mole_image, mole_image.get_rect(topleft=(0,0)))  #
+            screen.blit(mole_image, mole_image.get_rect(topleft=(row * 32,col * 32)))
             pygame.display.flip()
             clock.tick(60)
     finally:
